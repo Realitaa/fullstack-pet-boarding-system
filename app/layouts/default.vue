@@ -32,6 +32,14 @@ const links = [
       },
     },
     {
+      label: "Reservasi Hewan",
+      icon: "i-lucide:calendar-1",
+      to: "/reservations",
+      onSelect: () => {
+        open.value = false;
+      },
+    },
+    {
       label: "Settings",
       to: "/settings",
       icon: "i-lucide-settings",
