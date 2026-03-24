@@ -26,4 +26,10 @@ export default defineNuxtConfig({
   fonts: {
     families: [{ name: "Funnel Sans", provider: "google" }],
   },
+
+  vite: {
+    optimizeDeps: {
+      include: ["zod"],
+    },
+  },
 });

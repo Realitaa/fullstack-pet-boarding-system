@@ -85,8 +85,9 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
     });
 
     if (isSuccess) {
-      console.log('Will navigate to dashboard using navigateTo("/dashboard")');
-      // navigateTo("/dashboard");
+      setTimeout(() => {
+        navigateTo("/dashboard");
+      }, 1500);
     } else {
       isLoading.value = false;
     }
