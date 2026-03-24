@@ -6,79 +6,63 @@ const route = useRoute();
 const open = ref(false);
 
 const links = [
-  [
-    {
-      label: "Home",
-      icon: "i-lucide-house",
-      to: "/dashboard",
-      onSelect: () => {
-        open.value = false;
-      },
+  {
+    label: "Beranda",
+    icon: "i-lucide-house",
+    to: "/dashboard",
+    onSelect: () => {
+      open.value = false;
     },
-    {
-      label: "Manajemen Pengguna",
-      icon: "i-lucide:users",
-      to: "/users",
-      onSelect: () => {
-        open.value = false;
-      },
+  },
+  {
+    label: "Manajemen Pengguna",
+    icon: "i-lucide:users",
+    to: "/users",
+    onSelect: () => {
+      open.value = false;
     },
-    {
-      label: "Manajemen Hewan",
-      icon: "i-lucide-paw-print",
-      to: "/animals",
-      onSelect: () => {
-        open.value = false;
-      },
+  },
+  {
+    label: "Manajemen Hewan",
+    icon: "i-lucide-paw-print",
+    to: "/animals",
+    onSelect: () => {
+      open.value = false;
     },
-    {
-      label: "Manajemen Kandang",
-      icon: "game-icons:bird-cage",
-      to: "/cages",
-      onSelect: () => {
-        open.value = false;
-      },
+  },
+  {
+    label: "Manajemen Kandang",
+    icon: "game-icons:bird-cage",
+    to: "/cages",
+    onSelect: () => {
+      open.value = false;
     },
-    {
-      label: "Manajemen Layanan",
-      icon: "hugeicons:service",
-      to: "/services",
-      onSelect: () => {
-        open.value = false;
-      },
+  },
+  {
+    label: "Manajemen Layanan",
+    icon: "hugeicons:service",
+    to: "/services",
+    onSelect: () => {
+      open.value = false;
     },
-    {
-      label: "Reservasi Hewan",
-      icon: "i-lucide:calendar-1",
-      to: "/reservations",
-      onSelect: () => {
-        open.value = false;
-      },
+  },
+  {
+    label: "Reservasi Hewan",
+    icon: "i-lucide:calendar-1",
+    to: "/reservations",
+    onSelect: () => {
+      open.value = false;
     },
-    {
-      label: "Riwayat Pembayaran",
-      icon: "uil:bill",
-      to: "/payments",
-      onSelect: () => {
-        open.value = false;
-      },
+  },
+  {
+    label: "Riwayat Pembayaran",
+    icon: "uil:bill",
+    to: "/payments",
+    onSelect: () => {
+      open.value = false;
     },
-  ],
-  [
-    {
-      label: "Feedback",
-      icon: "i-lucide-message-circle",
-      to: "https://github.com/nuxt-ui-templates/dashboard",
-      target: "_blank",
-    },
-    {
-      label: "Help & Support",
-      icon: "i-lucide-info",
-      to: "https://github.com/nuxt-ui-templates/dashboard",
-      target: "_blank",
-    },
-  ],
-] satisfies NavigationMenuItem[][];
+  },
+] satisfies NavigationMenuItem[];
 
 const groups = computed(() => [
   {
@@ -111,13 +95,11 @@ const groups = computed(() => [
       </template>
 
       <template #default="{ collapsed }">
-        <UNavigationMenu :collapsed="collapsed" :items="links[0]" orientation="vertical" tooltip popover />
-
-        <UNavigationMenu :collapsed="collapsed" :items="links[1]" orientation="vertical" tooltip class="mt-auto" />
+        <UNavigationMenu :collapsed="collapsed" :items="links" orientation="vertical" tooltip popover />
       </template>
 
       <template #footer="{ collapsed }">
-        <UserMenu :collapsed="collapsed" />
+        <SidebarCardUser :collapsed="collapsed" />
       </template>
     </UDashboardSidebar>
 
