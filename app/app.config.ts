@@ -1,8 +1,16 @@
 export default defineAppConfig({
   ui: {
     colors: {
-      primary: 'green',
-      neutral: 'slate'
-    }
-  }
-})
+      neutral: "slate",
+    },
+    carousel: {
+      slots: {
+        dots: "absolute inset-x-0 bottom-3 flex flex-wrap items-center justify-center gap-3 h-3!",
+        dot: [
+          "cursor-pointer size-3 bg-accented/50 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+          "transition",
+        ],
+      },
+    },
+  },
+});

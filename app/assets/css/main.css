@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
 
+:root {
+  --ui-primary: var(--color-teal-300);
+}
+
 @theme static {
   --font-sans: "Funnel Sans", sans-serif;
 
