@@ -19,42 +19,6 @@ const items = ref<DropdownMenuItem[]>([
     color: "error",
   },
 ]);
-
-let observer: MutationObserver | null = null;
-let frame: number | null = null;
-
-onMounted(() => {
-  const sidebar = document.querySelector("#dashboard-sidebar-default");
-
-  if (!sidebar) return;
-
-  const updateWidth = () => {
-    if (frame) cancelAnimationFrame(frame);
-
-    frame = requestAnimationFrame(() => {
-      const width = getComputedStyle(sidebar!).getPropertyValue("--width");
-      document.documentElement.style.setProperty(
-        "--sidebar-width",
-        width.trim(),
-      );
-    });
-  };
-
-  updateWidth();
-
-  observer = new MutationObserver(() => {
-    updateWidth();
-  });
-
-  observer.observe(sidebar, {
-    attributes: true,
-    attributeFilter: ["style"],
-  });
-});
-
-onBeforeUnmount(() => {
-  observer?.disconnect();
-});
 </script>
 
 <template>
@@ -66,7 +30,7 @@ onBeforeUnmount(() => {
       sideOffset: 4,
     }"
     :ui="{
-      content: collapsed ? 'w-full' : 'w-[calc(var(--sidebar-width)-2rem)]',
+      content: collapsed ? 'w-full' : 'w-(--reka-dropdown-menu-trigger-width)',
     }"
   >
     <div class="w-full">
