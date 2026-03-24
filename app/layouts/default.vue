@@ -32,6 +32,14 @@ const links = [
       },
     },
     {
+      label: "Manajemen Kandang",
+      icon: "game-icons:bird-cage",
+      to: "/cages",
+      onSelect: () => {
+        open.value = false;
+      },
+    },
+    {
       label: "Reservasi Hewan",
       icon: "i-lucide:calendar-1",
       to: "/reservations",
