@@ -55,6 +55,14 @@ const links = [
         open.value = false;
       },
     },
+    {
+      label: "Riwayat Pembayaran",
+      icon: "uil:bill",
+      to: "/payments",
+      onSelect: () => {
+        open.value = false;
+      },
+    },
   ],
   [
     {
