@@ -57,6 +57,7 @@ async function migrate() {
     }
 
     console.log("Migrations completed!");
+    1;
   } catch (err) {
     await client.query("ROLLBACK");
     console.error(err);
