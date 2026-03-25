@@ -1,11 +1,6 @@
 import { readdirSync, readFileSync } from "fs";
 import { join } from "path";
-import { Pool } from "pg";
-import "dotenv/config";
-
-const db = new Pool({
-  connectionString: process.env.DATABASE_URL,
-});
+import { db } from "../shared/database/connection.js";
 
 async function migrate() {
   const client = await db.connect();

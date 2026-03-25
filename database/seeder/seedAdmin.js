@@ -1,10 +1,6 @@
-import { Pool } from "pg";
 import bcrypt from "bcrypt";
+import { db } from "../../shared/database/connection.js";
 import "dotenv/config";
-
-const db = new Pool({
-  connectionString: process.env.DATABASE_URL,
-});
 
 async function seedAdmin() {
   const client = await db.connect();
@@ -21,7 +17,7 @@ async function seedAdmin() {
     );
 
     if (existing.rows.length > 0) {
-      console.log("Admin already exists ✅");
+      console.log("Admin already exists!");
       return;
     }
 
