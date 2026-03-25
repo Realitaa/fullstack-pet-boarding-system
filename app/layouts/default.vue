@@ -9,7 +9,7 @@ const links = [
   {
     label: "Beranda",
     icon: "i-lucide-house",
-    to: "/dashboard",
+    to: "/home",
     onSelect: () => {
       open.value = false;
     },
@@ -88,14 +88,27 @@ const groups = computed(() => [
 
 <template>
   <UDashboardGroup unit="rem">
-    <UDashboardSidebar id="default" v-model:open="open" collapsible resizable class="bg-elevated/25" :minSize="16"
-      :ui="{ footer: 'lg:border-t lg:border-default' }">
+    <UDashboardSidebar
+      id="default"
+      v-model:open="open"
+      collapsible
+      resizable
+      class="bg-elevated/25"
+      :minSize="16"
+      :ui="{ footer: 'lg:border-t lg:border-default' }"
+    >
       <template #header="{ collapsed }">
         <DashboardSidebarTime :collapsed="collapsed" />
       </template>
 
       <template #default="{ collapsed }">
-        <UNavigationMenu :collapsed="collapsed" :items="links" orientation="vertical" tooltip popover />
+        <UNavigationMenu
+          :collapsed="collapsed"
+          :items="links"
+          orientation="vertical"
+          tooltip
+          popover
+        />
       </template>
 
       <template #footer="{ collapsed }">

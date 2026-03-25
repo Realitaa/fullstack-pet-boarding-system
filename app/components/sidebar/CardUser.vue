@@ -7,6 +7,8 @@ defineProps({
   },
 });
 
+const { currentPictureData } = useProfilePicture();
+
 const showLogoutConfirm = ref(false);
 
 const items = computed<DropdownMenuItem[]>(() => [
@@ -58,7 +60,7 @@ function logout() {
   >
     <div class="w-full">
       <UAvatar
-        src="https://github.com/benjamincanac.png"
+        :src="currentPictureData?.src"
         v-if="collapsed"
         class="mb-3 hover:bg-accented hover:cursor-pointer"
       />
@@ -68,7 +70,7 @@ function logout() {
         v-else
       >
         <div class="flex items-center gap-2 w-full">
-          <UAvatar src="https://github.com/benjamincanac.png" />
+          <UAvatar :src="currentPictureData?.src" />
           <p class="font-bold overflow-hidden text-ellipsis">Realitaa</p>
         </div>
       </UCard>

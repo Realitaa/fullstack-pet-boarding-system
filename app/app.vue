@@ -9,6 +9,12 @@ useHead({
 
 const title = "Sistem Penitipan Hewan";
 
+const { initProfilePicture } = useProfilePicture();
+
+await callOnce(async () => {
+  await initProfilePicture();
+});
+
 useSeoMeta({
   title,
   ogTitle: title,
