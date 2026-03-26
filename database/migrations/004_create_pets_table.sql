@@ -6,7 +6,7 @@ CREATE TABLE pets (
   age INT,
   condition TEXT,
   notes TEXT,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
   FOREIGN KEY (pet_type_id) REFERENCES pet_types(id) ON DELETE CASCADE
 );

@@ -3,7 +3,7 @@ CREATE TABLE booking_services (
   booking_id BIGINT NOT NULL,
   service_id BIGINT NOT NULL,
   quantity INT,
-  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (booking_id) REFERENCES bookings(id),
   FOREIGN KEY (service_id) REFERENCES services(id)
 );

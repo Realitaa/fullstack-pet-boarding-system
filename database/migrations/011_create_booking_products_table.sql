@@ -3,7 +3,7 @@ CREATE TABLE booking_products (
   booking_id BIGINT NOT NULL,
   product_id BIGINT NOT NULL,
   quantity INT NOT NULL DEFAULT 1,
-  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (booking_id) REFERENCES bookings(id),
   FOREIGN KEY (product_id) REFERENCES products(id)
 );

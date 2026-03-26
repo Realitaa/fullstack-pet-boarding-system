@@ -5,5 +5,5 @@ CREATE TABLE cages (
   name VARCHAR(255) NOT NULL,
   capacity INT NOT NULL,
   status cage_status NOT NULL DEFAULT 'available',
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );

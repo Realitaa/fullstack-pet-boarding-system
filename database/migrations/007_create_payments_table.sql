@@ -7,6 +7,6 @@ CREATE TABLE payments (
   amount BIGINT NOT NULL,
   status payment_status NOT NULL,
   method payment_method NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (booking_id) REFERENCES bookings(id) ON DELETE CASCADE
 );
