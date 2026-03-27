@@ -1,0 +1,22 @@
+import * as userRepo from "#server/repositories/user.repository";
+import * as sessionRepo from "#server/repositories/session.repository";
+import { transformUser } from "#server/utils/transformers";
+import { NotFoundError, UnauthorizedError } from "~~/server/utils/exceptions";
+import bcrypt from "bcrypt";
+
+export const login = async (email: string, password: string) => {
+  const user = await userRepo.findByEmail(email);
+
+  if (!user) throw new NotFoundError("Pengguna tidak ditemukan");
+
+  const valid = await bcrypt.compare(password, user.password);
+  if (!valid) throw new UnauthorizedError("Kredensial tidak valid");
+  console.log("comparing password");
+
+  const sessionId = await sessionRepo.createSession(user.id);
+
+  return {
+    sessionId,
+    user: transformUser(user),
+  };
+};
