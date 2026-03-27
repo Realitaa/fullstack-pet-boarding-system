@@ -3,6 +3,10 @@ import { h, resolveComponent } from "vue";
 import type { TableColumn } from "@nuxt/ui";
 import type { Row } from "@tanstack/vue-table";
 
+definePageMeta({
+  middleware: "auth",
+});
+
 const UButton = resolveComponent("UButton");
 const UBadge = resolveComponent("UBadge");
 const UDropdownMenu = resolveComponent("UDropdownMenu");
@@ -188,8 +192,11 @@ function getRowItems(row: Row<Payment>) {
     </template>
 
     <template #body>
-      <UPageHeader title="Tabel Layanan"
-        description="Kelola layanan yang dapat disediakan kepada hewan yang dititipkan." class="pt-0!" />
+      <UPageHeader
+        title="Tabel Layanan"
+        description="Kelola layanan yang dapat disediakan kepada hewan yang dititipkan."
+        class="pt-0!"
+      />
       <UTable :data="data" :columns="columns" class="flex-1" />
     </template>
   </UDashboardPanel>
