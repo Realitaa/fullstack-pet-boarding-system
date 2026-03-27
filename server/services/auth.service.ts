@@ -11,7 +11,6 @@ export const login = async (email: string, password: string) => {
 
   const valid = await bcrypt.compare(password, user.password);
   if (!valid) throw new UnauthorizedError("Kredensial tidak valid");
-  console.log("comparing password");
 
   const sessionId = await sessionRepo.createSession(user.id);
 

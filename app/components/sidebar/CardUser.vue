@@ -8,6 +8,7 @@ defineProps({
 });
 
 const { currentPictureData } = useProfilePicture();
+const { logout } = useAuth();
 
 const showLogoutConfirm = ref(false);
 
@@ -40,9 +41,9 @@ const items = computed<DropdownMenuItem[]>(() => [
     : []),
 ]);
 
-function logout() {
-  // another logout logic
-  navigateTo("/logout");
+async function authLogout() {
+  await logout();
+  return navigateTo("/");
 }
 </script>
 
@@ -82,7 +83,7 @@ function logout() {
         <p class="text-sm">Apakah Anda yakin ingin keluar dari akun?</p>
         <div class="flex gap-2 mt-2 w-full justify-end">
           <UButton @click="showLogoutConfirm = false">Batal</UButton>
-          <UButton color="error" @click="logout">Keluar</UButton>
+          <UButton color="error" @click="authLogout">Keluar</UButton>
         </div>
       </div>
     </template>

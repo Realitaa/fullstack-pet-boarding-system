@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import type { DropdownMenuItem } from "@nuxt/ui";
 
+definePageMeta({
+  middleware: "auth",
+});
+
+const { loggedIn, user } = useUserSession();
+
 const items = [
   [
     {

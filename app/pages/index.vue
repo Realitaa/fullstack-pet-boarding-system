@@ -4,7 +4,14 @@ import * as z from "zod";
 
 definePageMeta({
   layout: false,
+  middleware: "guest",
 });
+
+// composables
+const { login, loading: isLoading } = useAuth();
+const toast = useToast();
+const route = useRoute();
+const { fetch: refreshSession } = useUserSession();
 
 // Carousel picture list
 const carouselItems = [
@@ -31,15 +38,13 @@ const carouselItems = [
 ];
 
 // Form state, schema and event handler
-const isLoading = ref(false);
-
 const fields = computed<AuthFormField[]>(() => [
   {
-    name: "username",
-    id: "username",
+    name: "email",
+    id: "email",
     type: "text",
-    label: "Username",
-    placeholder: "Masukkan username",
+    label: "Email",
+    placeholder: "Masukkan email",
     required: true,
     disabled: isLoading.value,
   },
@@ -55,7 +60,7 @@ const fields = computed<AuthFormField[]>(() => [
 ]);
 
 const schema = z.object({
-  username: z.string("Username dibutuhkan"),
+  email: z.email("Email tidak valid"),
   password: z.string("Password dibutuhkan"),
 });
 
@@ -67,31 +72,36 @@ const buttonSubmit = computed(() => ({
   disabled: isLoading.value,
 }));
 
-const toast = useToast();
-
 async function onSubmit(payload: FormSubmitEvent<Schema>) {
-  isLoading.value = true;
-  // Mock login delay
-  new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
-    const isSuccess = Math.random() < 0.5;
-    toast.add({
-      title: isSuccess ? "Berhasil" : "Gagal",
-      description: isSuccess
-        ? "Anda berhasil masuk dan akan diarahkan ke halaman dashboard"
-        : "Password atau username salah, silahkan coba lagi.",
-      color: isSuccess ? "success" : "error",
-      icon: isSuccess ? "material-symbols:check" : "lucide:x",
-      duration: isSuccess ? 1500 : 5000,
+  try {
+    await login({
+      email: payload.data.email,
+      password: payload.data.password,
     });
 
-    if (isSuccess) {
-      setTimeout(() => {
-        navigateTo("/dashboard");
-      }, 1500);
-    } else {
-      isLoading.value = false;
-    }
-  });
+    await refreshSession();
+
+    toast.add({
+      title: "Berhasil",
+      description: "Anda berhasil masuk dan akan diarahkan ke halaman home",
+      color: "success",
+      icon: "material-symbols:check",
+      duration: 1500,
+    });
+
+    setTimeout(() => {
+      navigateTo("/home");
+    }, 1500);
+  } catch (err: any) {
+    toast.add({
+      title: "Gagal",
+      description:
+        err?.data?.message ?? "Password atau email salah, silahkan coba lagi.",
+      color: "error",
+      icon: "lucide:x",
+      duration: 5000,
+    });
+  }
 }
 
 // Transition state
@@ -100,6 +110,16 @@ const isHydrating = ref(true);
 onMounted(() => {
   setTimeout(() => {
     isHydrating.value = false;
+
+    if (route.query.message === "session_expired") {
+      toast.add({
+        title: "Sesi Anda telah berakhir",
+        description: "Silahkan masuk kembali.",
+        color: "warning",
+        icon: "material-symbols:warning",
+        duration: 5000,
+      });
+    }
   }, 100);
 });
 </script>
