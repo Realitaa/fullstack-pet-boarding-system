@@ -1,9 +1,9 @@
 export const transformUser = (user: any) => {
   return {
     id: user.id,
-    name: user.name,
-    email: user.email,
+    fullname: user.fullname,
     username: user.username,
+    email: user.email,
     role: user.role,
     pfp_id: user.pfp_id,
     joinedAt: user.createdAt,

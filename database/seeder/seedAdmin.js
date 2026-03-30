@@ -8,7 +8,8 @@ async function seedAdmin() {
   try {
     const email = process.env.FAUSERNAME || "admin@example.com";
     const password = process.env.FAPASSWORD || "12345678";
-    const name = process.env.FANAME || "Admin";
+    const fullname = process.env.FANAME || "Admin";
+    const role = "admin";
 
     // cek apakah admin sudah ada
     const existing = await client.query(
@@ -27,10 +28,10 @@ async function seedAdmin() {
     // insert admin
     await client.query(
       `
-      INSERT INTO users (name, email, password)
-      VALUES ($1, $2, $3)
+      INSERT INTO users (fullname, email, password, role)
+      VALUES ($1, $2, $3, $4)
       `,
-      [name, email, passwordHash],
+      [fullname, email, passwordHash, role],
     );
 
     console.log("Admin seed complete!");
