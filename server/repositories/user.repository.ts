@@ -16,3 +16,12 @@ export const findById = async (id: string) => {
 
   return result.rows[0] || null;
 };
+
+export const updateProfilePicture = async (id: number, pfpId: number) => {
+  const result = await db.query(
+    `UPDATE users SET pfp_id = $1 WHERE id = $2 RETURNING *`,
+    [pfpId, id],
+  );
+
+  return result.rows[0] || null;
+};

@@ -9,12 +9,6 @@ useHead({
 
 const title = "Sistem Penitipan Hewan";
 
-const { initProfilePicture } = useProfilePicture();
-
-await callOnce(async () => {
-  await initProfilePicture();
-});
-
 useSeoMeta({
   title,
   ogTitle: title,
@@ -23,14 +17,12 @@ useSeoMeta({
 
 <template>
   <UApp>
-    <NuxtLoadingIndicator
-      color="repeating-linear-gradient(
+    <NuxtLoadingIndicator color="repeating-linear-gradient(
       to right,
       #5eead4 0%,   /* teal-300 */
       #2dd4bf 50%,  /* teal-400 */
       #0f766e 100%  /* teal-700 */
-    )"
-    />
+    )" />
     <NuxtLayout>
       <NuxtPage class="bg-slate-50 dark:bg-accented/50" />
     </NuxtLayout>
